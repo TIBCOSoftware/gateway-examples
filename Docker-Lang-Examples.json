@@ -1,0 +1,642 @@
+{
+    "api": {
+        "name": "Docker Lang Examples",
+        "description": "",
+        "cors_allow_origin": "*",
+        "cors_allow_headers": "content-type, accept",
+        "cors_allow_credentials": true,
+        "cors_request_headers": "*",
+        "cors_max_age": 600,
+        "enable_swagger": true,
+        "environments": [
+            {
+                "name": "Development",
+                "description": "",
+                "data": null,
+                "session_type": "client",
+                "session_header": "X-Session-Id",
+                "session_name": "",
+                "session_auth_key": "",
+                "session_encryption_key": "",
+                "session_auth_key_rotate": "",
+                "session_encryption_key_rotate": "",
+                "show_javascript_errors": false
+            }
+        ],
+        "libraries": [
+            {
+                "name": "DataValidationUtils",
+                "description": "",
+                "data": "var dataValidationUtils = {};\n\ndataValidationUtils.isNull = function(toBeTestedVariable)\n{\n    return toBeTestedVariable === null;\n};\n\ndataValidationUtils.isUndefined = function(toBeTestedVariable)\n{\n    return toBeTestedVariable === undefined;\n};\n\ndataValidationUtils.isDefinedAndNotNull = function(toBeTestedVariable)\n{\n    return !this.isUndefined(toBeTestedVariable) \u0026\u0026 !this.isNull(toBeTestedVariable);\n};\n\ndataValidationUtils.isBoolean = function(toBeTestedVariable)\n{\n    return toBeTestedVariable === true || toBeTestedVariable === false;\n};\n\ndataValidationUtils.isString = function(toBeTestedVariable)\n{\n    return typeof toBeTestedVariable === 'string' || toBeTestedVariable instanceof String;\n};\n\ndataValidationUtils.isNumber = function(toBeTestedVariable)\n{\n    return !isNaN(toBeTestedVariable) \u0026\u0026 typeof toBeTestedVariable === 'number';\n};\n\ndataValidationUtils.isObject = function(toBeTestedVariable)\n{\n    return toBeTestedVariable instanceof Object;\n};\n\ndataValidationUtils.isArray = function(toBeTestedVariable)\n{\n    return toBeTestedVariable instanceof Array;\n};\n\ndataValidationUtils.isFunction = function(toBeTestedVariable)\n{\n    return typeof toBeTestedVariable === 'function';\n};\n\ndataValidationUtils.isObjectWithKeyValuePassingValidation = function(toBeTestedObject, validationFunction)\n{\n    if (!this.isFunction(validationFunction))\n    {\n        throw new Error('Invalid type passed as validationFunction');\n    }\n    if (!this.isObject(toBeTestedObject))\n    {\n        return false;\n    }\n    var key;\n    for (key in toBeTestedObject)\n    {\n        if (toBeTestedObject.hasOwnProperty(key))\n        {\n            if (!validationFunction(key, toBeTestedObject[key]))\n            {\n                return false;\n            }\n        }\n    }\n    return true;\n};\n\ndataValidationUtils.isArrayWithElementsTypePassingValidation = function(toBeTestedVariable, validationFunction)\n{\n    if (!this.isFunction(validationFunction))\n    {\n        throw new Error('Invalid type passed as validationFunction');\n    }\n    if (!this.isArray(toBeTestedVariable))\n    {\n        return false;\n    }\n    var len = toBeTestedVariable.length;\n    var i;\n    for (i = 0; i \u003c len; i += 1)\n    {\n        if (!validationFunction(toBeTestedVariable[i]))\n        {\n            return false;\n        }\n    }\n    return true;\n};\n\ndataValidationUtils.booleanOrNull = function(toBeTestedVariable)\n{\n    return this.isBoolean(toBeTestedVariable) ? toBeTestedVariable : null;\n};\n\ndataValidationUtils.stringOrNull = function(toBeTestedVariable)\n{\n    return this.isString(toBeTestedVariable) ? toBeTestedVariable : null;\n};\n\ndataValidationUtils.numberOrNull = function(toBeTestedVariable)\n{\n    return this.isNumber(toBeTestedVariable) ? toBeTestedVariable : null;\n};\n\ndataValidationUtils.arrayWithElementsTypePassingValidationOrNull = function(toBeTestedVariable, validationFunction)\n{\n    return this.isArrayWithElementsTypePassingValidation(toBeTestedVariable, validationFunction) ? toBeTestedVariable : null;\n};"
+            }
+        ],
+        "remote_endpoints": [
+            {
+                "name": "DockerNode",
+                "codename": "nodebox",
+                "description": "",
+                "type": "docker",
+                "status": "Success",
+                "status_message": null,
+                "data": {
+                    "tag": "latest",
+                    "command": "node app.js",
+                    "arguments": [],
+                    "repository": "nanoscale/node",
+                    "environment": {}
+                },
+                "environment_data": null
+            },
+            {
+                "name": "DockerPython",
+                "codename": "pythonbox",
+                "description": "",
+                "type": "docker",
+                "status": "Success",
+                "status_message": null,
+                "data": {
+                    "tag": "latest",
+                    "command": "python app.py",
+                    "arguments": [],
+                    "repository": "nanoscale/python",
+                    "environment": {}
+                },
+                "environment_data": null
+            },
+            {
+                "name": "GoLangGreetDocker",
+                "codename": "goLangGreetDocker",
+                "description": "",
+                "type": "docker",
+                "status": "Success",
+                "status_message": null,
+                "data": {
+                    "tag": "latest",
+                    "command": "app",
+                    "arguments": [],
+                    "repository": "nanoscale/golang",
+                    "environment": {}
+                },
+                "environment_data": null
+            },
+            {
+                "name": "JavaGreetDocker",
+                "codename": "javaGreetDocker",
+                "description": "",
+                "type": "docker",
+                "status": "Success",
+                "status_message": null,
+                "data": {
+                    "tag": "latest",
+                    "command": "java Greet",
+                    "arguments": [],
+                    "repository": "nanoscale/java",
+                    "environment": {}
+                },
+                "environment_data": null
+            },
+            {
+                "name": "PhpGreetDocker",
+                "codename": "phpGreetDocker",
+                "description": "",
+                "type": "docker",
+                "status": "Success",
+                "status_message": null,
+                "data": {
+                    "tag": "latest",
+                    "command": "php Greet.php",
+                    "arguments": [],
+                    "repository": "nanoscale/php",
+                    "environment": {}
+                },
+                "environment_data": null
+            },
+            {
+                "name": "RubyGreetDocker",
+                "codename": "rubyGreetDocker",
+                "description": "",
+                "type": "docker",
+                "status": "Success",
+                "status_message": null,
+                "data": {
+                    "tag": "latest",
+                    "command": "ruby ./Greet.rb",
+                    "arguments": [],
+                    "repository": "nanoscale/ruby",
+                    "environment": {}
+                },
+                "environment_data": null
+            }
+        ],
+        "shared_components": [
+            {
+                "type": "js",
+                "conditional": "",
+                "conditional_positive": false,
+                "data": "console.log(\"Greet Docker Done\", request.path);\nvar endTime = new Date();\nresponse = new AP.HTTP.Response();\nresponse.headers[\"Content-Type\"] = \"application/json\";\nresponse.statusCode = 200;;\nresponse.body = JSON.stringify({\n  \"statusMessage\": dockerResponse.error ? \"Failed\" : \"Success\",\n  \"logs\": dockerResponse.logs,\n  \"startTime\": startTime,\n  \"endTime\": endTime,\n  \"elapsedTime\": (endTime - startTime) / 1000\n});",
+                "name": "GreetDockerProxyEndPointPostExecutionProcessing",
+                "description": ""
+            },
+            {
+                "type": "js",
+                "conditional": "",
+                "conditional_positive": false,
+                "data": "console.log(\"Greet Docker Request\", request.path);\nvar startTime = new Date();\nvar dockerRequest = new AP.Docker.Request();\nvar args = [];\nif (dataValidationUtils.isString(request.params.name) \u0026\u0026 request.params.name.length \u003e 0) {\n    var name = request.params.name;\n    args.push(name);\n}  ",
+                "name": "GreetDockerProxyEndPointPreExecutionProcessing",
+                "description": ""
+            },
+            {
+                "type": "js",
+                "conditional": "",
+                "conditional_positive": false,
+                "data": "var endTime = new Date();\nresponse = new AP.HTTP.Response();\nresponse.headers[\"Content-Type\"] = \"application/json\";\nresponse.statusCode = dockerResponse.error?400:200;\nresponse.body = JSON.stringify({\n  \"statusMessage\": dockerResponse.error ? \"Failed\" : \"Success\",\n  \"output\":dockerResponse.error?dockerResponse.stderr:dockerResponse.logs,\n  \"startTime\": startTime,\n  \"endTime\": endTime,\n  \"elapsedTime\": (endTime - startTime) / 1000\n});",
+                "name": "postDockerExecution",
+                "description": ""
+            },
+            {
+                "type": "js",
+                "conditional": "",
+                "conditional_positive": false,
+                "data": "var startTime = new Date();\nvar args = [];\nif (request.params.name \u0026\u0026 request.params.name.length \u003e 0) {\n    var name = request.params.name;\n    args.push(name);\n}  ",
+                "name": "preDockerExecution",
+                "description": ""
+            }
+        ],
+        "proxy_endpoints": [
+            {
+                "type": "http",
+                "name": "GoLangGreetDocker",
+                "description": "",
+                "active": true,
+                "cors_enabled": false,
+                "routes": [
+                    {
+                        "id": "6c6e2f47-1add-449e-859c-e9c84f77308b",
+                        "path": "/docker/golang",
+                        "methods": [
+                            "GET"
+                        ],
+                        "get_method": true,
+                        "put_method": false,
+                        "post_method": false,
+                        "delete_method": false
+                    }
+                ],
+                "components": [
+                    {
+                        "type": "",
+                        "conditional": "",
+                        "conditional_positive": false,
+                        "data": {},
+                        "shared_component_index": 2
+                    },
+                    {
+                        "type": "single",
+                        "conditional": "",
+                        "conditional_positive": true,
+                        "before": [
+                            {
+                                "type": "js",
+                                "data": "dockerRemoteEndPoint.request = dockerRequest;\ndockerRemoteEndPoint.request.execute(null, args, null);"
+                            }
+                        ],
+                        "after": [
+                            {
+                                "type": "js",
+                                "data": "var dockerResponse = dockerRemoteEndPoint.response;"
+                            }
+                        ],
+                        "call": {
+                            "endpoint_name_override": "dockerRemoteEndPoint",
+                            "conditional": "",
+                            "conditional_positive": true,
+                            "remote_endpoint_index": 3
+                        },
+                        "data": ""
+                    },
+                    {
+                        "type": "",
+                        "conditional": "",
+                        "conditional_positive": false,
+                        "data": {},
+                        "shared_component_index": 1
+                    }
+                ],
+                "tests": [
+                    {
+                        "id": 6622,
+                        "name": "GoLangGreetDocker | John",
+                        "methods": [
+                            "GET"
+                        ],
+                        "route": "/docker/golang",
+                        "body": "",
+                        "pairs": [
+                            {
+                                "id": 8677,
+                                "type": "get",
+                                "key": "name",
+                                "value": "John"
+                            }
+                        ],
+                        "data": null
+                    }
+                ],
+                "environment_index": 1
+            },
+            {
+                "type": "http",
+                "name": "JavaGreetDocker",
+                "description": "",
+                "active": true,
+                "cors_enabled": false,
+                "routes": [
+                    {
+                        "id": "8759829d-4a4c-4d34-a2b0-3aa7d590f4b5",
+                        "path": "/docker/java",
+                        "methods": [
+                            "GET"
+                        ],
+                        "get_method": true,
+                        "put_method": false,
+                        "post_method": false,
+                        "delete_method": false
+                    }
+                ],
+                "components": [
+                    {
+                        "type": "",
+                        "conditional": "",
+                        "conditional_positive": false,
+                        "data": {},
+                        "shared_component_index": 2
+                    },
+                    {
+                        "type": "single",
+                        "conditional": "",
+                        "conditional_positive": true,
+                        "before": [
+                            {
+                                "type": "js",
+                                "data": "dockerRemoteEndPoint.request = dockerRequest;\ndockerRemoteEndPoint.request.execute(null, args, null);"
+                            }
+                        ],
+                        "after": [
+                            {
+                                "type": "js",
+                                "data": "var dockerResponse = dockerRemoteEndPoint.response;"
+                            }
+                        ],
+                        "call": {
+                            "endpoint_name_override": "dockerRemoteEndPoint",
+                            "conditional": "",
+                            "conditional_positive": true,
+                            "remote_endpoint_index": 4
+                        },
+                        "data": ""
+                    },
+                    {
+                        "type": "",
+                        "conditional": "",
+                        "conditional_positive": false,
+                        "data": {},
+                        "shared_component_index": 1
+                    }
+                ],
+                "tests": [
+                    {
+                        "id": 6623,
+                        "name": "JavaGreetDocker | Ryan",
+                        "methods": [
+                            "GET"
+                        ],
+                        "route": "/java-greet-docker",
+                        "body": "",
+                        "pairs": [
+                            {
+                                "id": 8678,
+                                "type": "get",
+                                "key": "name",
+                                "value": "Ryan"
+                            }
+                        ],
+                        "data": null
+                    }
+                ],
+                "environment_index": 1
+            },
+            {
+                "type": "http",
+                "name": "NodeEndpoint",
+                "description": "",
+                "active": true,
+                "cors_enabled": true,
+                "routes": [
+                    {
+                        "id": "bb93c61c-d56d-4bae-aa04-96702e299fff",
+                        "path": "/docker/node",
+                        "methods": [
+                            "GET"
+                        ],
+                        "get_method": true,
+                        "put_method": false,
+                        "post_method": false,
+                        "delete_method": false
+                    }
+                ],
+                "components": [
+                    {
+                        "type": "single",
+                        "conditional": "",
+                        "conditional_positive": true,
+                        "before": [
+                            {
+                                "type": "js",
+                                "data": "nodebox.request = new AP.Docker.Request();\nnodebox.request.execute(null, [request.params.name], null);"
+                            }
+                        ],
+                        "after": [
+                            {
+                                "type": "js",
+                                "data": "response = new AP.HTTP.Response();\nresponse.setJSONBodyPretty({\n  \"logs\": nodebox.response.logs,\n  \"statusMessage\": nodebox.response.error ? \"Failed\" : \"Success\",\n});"
+                            }
+                        ],
+                        "call": {
+                            "endpoint_name_override": "nodebox",
+                            "conditional": "",
+                            "conditional_positive": true,
+                            "remote_endpoint_index": 1
+                        },
+                        "data": ""
+                    }
+                ],
+                "tests": [
+                    {
+                        "id": 6624,
+                        "name": "DockerNodeTest",
+                        "methods": [
+                            "GET"
+                        ],
+                        "route": "/docker/node",
+                        "body": "",
+                        "pairs": [
+                            {
+                                "id": 8692,
+                                "type": "get",
+                                "key": "name",
+                                "value": "World"
+                            }
+                        ],
+                        "data": null
+                    }
+                ],
+                "environment_index": 1
+            },
+            {
+                "type": "http",
+                "name": "PhpGreetDocker",
+                "description": "",
+                "active": true,
+                "cors_enabled": false,
+                "routes": [
+                    {
+                        "id": "a50746ee-2f2f-4f49-bab3-f25e763cf015",
+                        "path": "/docker/php",
+                        "methods": [
+                            "GET"
+                        ],
+                        "get_method": true,
+                        "put_method": false,
+                        "post_method": false,
+                        "delete_method": false
+                    }
+                ],
+                "components": [
+                    {
+                        "type": "",
+                        "conditional": "",
+                        "conditional_positive": false,
+                        "data": {},
+                        "shared_component_index": 2
+                    },
+                    {
+                        "type": "single",
+                        "conditional": "",
+                        "conditional_positive": true,
+                        "before": [
+                            {
+                                "type": "js",
+                                "data": "dockerRemoteEndPoint.request = dockerRequest;\ndockerRemoteEndPoint.request.execute(null, args, null);\n"
+                            }
+                        ],
+                        "after": [
+                            {
+                                "type": "js",
+                                "data": "var dockerResponse = dockerRemoteEndPoint.response;"
+                            }
+                        ],
+                        "call": {
+                            "endpoint_name_override": "dockerRemoteEndPoint",
+                            "conditional": "",
+                            "conditional_positive": true,
+                            "remote_endpoint_index": 5
+                        },
+                        "data": ""
+                    },
+                    {
+                        "type": "",
+                        "conditional": "",
+                        "conditional_positive": false,
+                        "data": {},
+                        "shared_component_index": 1
+                    }
+                ],
+                "tests": [
+                    {
+                        "id": 6625,
+                        "name": "PhpGreetDocker | Taha",
+                        "methods": [
+                            "GET"
+                        ],
+                        "route": "/php-greet-docker",
+                        "body": "",
+                        "pairs": [
+                            {
+                                "id": 8680,
+                                "type": "get",
+                                "key": "name",
+                                "value": "Taha"
+                            }
+                        ],
+                        "data": null
+                    }
+                ],
+                "environment_index": 1
+            },
+            {
+                "type": "http",
+                "name": "PythonEndpoint",
+                "description": "",
+                "active": true,
+                "cors_enabled": true,
+                "routes": [
+                    {
+                        "id": "92c57f05-c853-4704-8422-54c7101bb149",
+                        "path": "/docker/python",
+                        "methods": [
+                            "GET"
+                        ],
+                        "get_method": true,
+                        "put_method": false,
+                        "post_method": false,
+                        "delete_method": false
+                    }
+                ],
+                "components": [
+                    {
+                        "type": "",
+                        "conditional": "",
+                        "conditional_positive": false,
+                        "data": {},
+                        "shared_component_index": 2
+                    },
+                    {
+                        "type": "single",
+                        "conditional": "",
+                        "conditional_positive": true,
+                        "before": [
+                            {
+                                "type": "js",
+                                "data": "pythonbox.request = new AP.Docker.Request();\npythonbox.request.execute(null, args, null);"
+                            }
+                        ],
+                        "after": [
+                            {
+                                "type": "js",
+                                "data": "var dockerResponse = pythonbox.response;\nconsole.log(JSON.stringify(dockerResponse));"
+                            }
+                        ],
+                        "call": {
+                            "endpoint_name_override": "pythonbox",
+                            "conditional": "",
+                            "conditional_positive": true,
+                            "remote_endpoint_index": 2
+                        },
+                        "data": ""
+                    },
+                    {
+                        "type": "",
+                        "conditional": "",
+                        "conditional_positive": false,
+                        "data": {},
+                        "shared_component_index": 1
+                    }
+                ],
+                "tests": [
+                    {
+                        "id": 6626,
+                        "name": "PythonTest",
+                        "methods": [
+                            "GET"
+                        ],
+                        "route": "/docker/python",
+                        "body": "",
+                        "pairs": [
+                            {
+                                "id": 8681,
+                                "type": "get",
+                                "key": "name",
+                                "value": "World"
+                            }
+                        ],
+                        "data": null
+                    }
+                ],
+                "environment_index": 1
+            },
+            {
+                "type": "http",
+                "name": "RubyGreetDocker",
+                "description": "",
+                "active": true,
+                "cors_enabled": false,
+                "routes": [
+                    {
+                        "id": "8e2b5c82-ccef-418a-9cbf-bf638662aeca",
+                        "path": "/docker/ruby",
+                        "methods": [
+                            "GET"
+                        ],
+                        "get_method": true,
+                        "put_method": false,
+                        "post_method": false,
+                        "delete_method": false
+                    }
+                ],
+                "components": [
+                    {
+                        "type": "",
+                        "conditional": "",
+                        "conditional_positive": false,
+                        "data": {},
+                        "shared_component_index": 2
+                    },
+                    {
+                        "type": "single",
+                        "conditional": "",
+                        "conditional_positive": true,
+                        "before": [
+                            {
+                                "type": "js",
+                                "data": "dockerRemoteEndPoint.request = dockerRequest;\ndockerRemoteEndPoint.request.execute(null, args, null);"
+                            }
+                        ],
+                        "after": [
+                            {
+                                "type": "js",
+                                "data": "var dockerResponse = dockerRemoteEndPoint.response;"
+                            }
+                        ],
+                        "call": {
+                            "endpoint_name_override": "dockerRemoteEndPoint",
+                            "conditional": "",
+                            "conditional_positive": true,
+                            "remote_endpoint_index": 6
+                        },
+                        "data": ""
+                    },
+                    {
+                        "type": "",
+                        "conditional": "",
+                        "conditional_positive": false,
+                        "data": {},
+                        "shared_component_index": 1
+                    }
+                ],
+                "tests": [
+                    {
+                        "id": 6627,
+                        "name": "RubyGreetDocker | David",
+                        "methods": [
+                            "GET"
+                        ],
+                        "route": "/ruby-greet-docker",
+                        "body": "",
+                        "pairs": [
+                            {
+                                "id": 8682,
+                                "type": "get",
+                                "key": "name",
+                                "value": "David"
+                            }
+                        ],
+                        "data": null
+                    }
+                ],
+                "environment_index": 1
+            }
+        ],
+        "export_version": 1,
+        "base_url": ""
+    }
+}
